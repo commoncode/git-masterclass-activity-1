@@ -62,8 +62,8 @@ Note that commits G and C conflict - they both change the same line.
 <details><summary>Show me how</summary>
 
     # The --all flag specifies all branches
-    git checkout -b feature_1
-    git rebase -i 
+    git checkout feature_1
+    git rebase -i 0e17d3cadf90158e55d1bcf20d1ced122a00a061
     # in the rebase file, change line three to: squash 0d45141 J - incredible
     # in the commmit message file make the commit text: I+J - understanding and incredible
     # now rebasing the branch onto master
