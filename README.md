@@ -8,7 +8,7 @@ The only file (apart from this one) is [manuscript.md](https://github.com/common
 
 There is a series of branches already created to set the scene for this activity.
 
-_Try to perform the tasks using commands in your computer terminal - if you get stuck then click 'Show me how'_ 
+_Try to perform the tasks using commands in your computer terminal - if you get stuck then click 'Show me how'_
 
 ## Setup
 
@@ -25,7 +25,7 @@ _Try to perform the tasks using commands in your computer terminal - if you get 
 
 To restart the exercise at any time just `rm -Rf git-masterclass-activity-1` and re-clone.
 
--------------------------
+---
 
 This repo has a couple of branches with a sequence of commits resulting in a tree like this:
 
@@ -37,8 +37,10 @@ This repo has a couple of branches with a sequence of commits resulting in a tre
 A --- B --- G --- H                     master
 
 ```
+
 ## Task
->Inspect the git log for all branches and verify the above structure
+
+> Inspect the git log for all branches and verify the above structure
 
 <details><summary>Show me how</summary>
 
@@ -48,31 +50,34 @@ A --- B --- G --- H                     master
 </details>
 
 ## Task
-> Interactively rebase `feature_1` branch onto `master` and squash the last two commits
 
-The goal is to have a new master branch with commits as 
+> Interactively rebase `feature_1` branch onto `master` and squash commits I + J.
+
+The goal is to have a new master branch with commits as
+
 ```
-A --- B --- G --- H --- C' --- D' --- I+J
+A --- B --- C --- D --- I+J' --- H'...
 ```
 
-Where `C'` and `D'` are the same change as `C` and `D` respectively and `I+J` is the combined changes of `I` and `J`.
+Where `H'` is the same change as `H` and `I+J'` is the combined changes of `I` and `J`.
 
 Note that commits G and C conflict - they both change the same line.
 
 <details><summary>Show me how</summary>
 
-    # The --all flag specifies all branches
-    git checkout feature_1
-    git rebase -i 0e17d3cadf90158e55d1bcf20d1ced122a00a061
-    # in the rebase file, change line three to: squash 0d45141 J - incredible
-    # in the commmit message file make the commit text: I+J - understanding and incredible
-    # now rebasing the branch onto master
+    # Rebase feature_1 onto master
     git checkout master
-    # Commits G and C' conflict - however we want C' as our latest change
-    git rebase feature_1 -X ours
+    git rebase origin/feature_1
+    ## Commits G' and C conflict - however we want C as our latest change. Open up your editor and select C changes
+    git add .
+    git rebase --skip
+    ## Commit H conflicts with feature_1 current state. Select H' change over feature_1.
+    git add .
+    git rebase --contiue
+
+    # Squash J into I
+    git rebase -i HEAD~6
+    # in the rebase file, change line two to: squash 0d45141 J - incredible
+    # in the commmit message file make the commit text: "I+J - understanding and incredible" and comment out "J - incredible"
 
 </details>
-
-## Discussion Points
-- Did you arrive at the expected structure?
-- What might be some other methods of acheiving the same result?
