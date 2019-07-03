@@ -61,14 +61,15 @@ Note that commits G and C conflict - they both change the same line.
 
 <details><summary>Show me how</summary>
 
-    # The --all flag specifies all branches
     git checkout feature_1
-    git rebase -i 0e17d3cadf90158e55d1bcf20d1ced122a00a061
+    git rebase -i HEAD~2
     # in the rebase file, change line three to: squash 0d45141 J - incredible
     # in the commmit message file make the commit text: I+J - understanding and incredible
-    # now rebasing the branch onto master
+    
+    # now rebasing the branch onto master (could also rebase on branch and then FF merge)
     git checkout master
-    # Commits G and C' conflict - however we want C' as our latest change
+    
+    # Commits G and C' conflict - however we want C' as our latest change (wasn't specified)
     git rebase feature_1 -X ours
 
 </details>
