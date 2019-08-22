@@ -48,20 +48,20 @@ A --- B --- G --- H                     master
 </details>
 
 ## Task
-> Interactively rebase `feature_1` branch onto `master` and squash the last two commits
+> Interactively rebase `feature_1` branch onto `master` and squash commits I + J.
 
 The goal is to have a new master branch with commits as 
 ```
 A --- B --- C' --- D' --- I+J --- H' 
 ```
 
-Where `C'` and `D'` are the same change as `C` and `D` respectively and `I+J` is the combined changes of `I` and `J`.
+Where `C'`, `D'` and `H'` are the same change as `C`, `D` and `H` respectively and `I+J` is the combined changes of `I` and `J`.
 
 Note that commits G and C conflict - they both change the same line.
 
 <details><summary>Show me how</summary>
 
-    # Rebase feature_1 into master
+    # Rebase feature_1 onto master
     git checkout master
     git rebase feature_1 
     ## Commits G and C' conflict - however we want C' as our latest change. Open up your idea and select C' change
