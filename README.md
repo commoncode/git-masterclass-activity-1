@@ -82,4 +82,4 @@ Note that commits G and C conflict - they both change the same line.
 
 ## Discussion Points
 - Did you arrive at the expected structure?
-- What might be some other methods of acheiving the same resu
+- What might be some other methods of acheiving the same result?
