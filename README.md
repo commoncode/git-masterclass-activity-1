@@ -52,10 +52,10 @@ A --- B --- G --- H                     master
 
 The goal is to have a new master branch with commits as 
 ```
-A --- B --- C' --- D' --- I+J --- H' 
+A --- B --- C --- D --- I+J' --- H'... 
 ```
 
-Where `C'`, `D'` and `H'` are the same change as `C`, `D` and `H` respectively and `I+J` is the combined changes of `I` and `J`.
+Where `H'` is the same change as `H` and `I+J'` is the combined changes of `I` and `J`.
 
 Note that commits G and C conflict - they both change the same line.
 
@@ -64,18 +64,17 @@ Note that commits G and C conflict - they both change the same line.
     # Rebase feature_1 onto master
     git checkout master
     git rebase feature_1 
-    ## Commits G and C' conflict - however we want C' as our latest change. Open up your idea and select C' change
-    ## Open up your idea and select C.
+    ## Commits G' and C conflict - however we want C as our latest change. Open up your editor and select C changes
+    git add .
     git rebase --skip
     ## Commit H conflicts with feature_1 current state. Select H' change over feature_1.
     git add .
     git rebase --contiue
 
     # Squash J into I
-    git checkout feature_1
     git rebase -i HEAD~6
-    # in the rebase file, change line three to: squash 0d45141 J - incredible
-    # in the commmit message file make the commit text: I+J - understanding and incredible
+    # in the rebase file, change line two to: squash 0d45141 J - incredible
+    # in the commmit message file make the commit text: "I+J - understanding and incredible" and comment out "J - incredible" 
     
 
 </details>
